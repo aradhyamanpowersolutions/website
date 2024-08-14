@@ -34,7 +34,7 @@ function Contact() {
     setIsSubmitting(true);
     setShowPopup(true);
 
-    fetch('http://localhost:5000/contact', {
+    fetch('https://website-livid-eight-69.vercel.app/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

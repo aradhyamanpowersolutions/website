@@ -50,7 +50,7 @@ function ApplyForm({ onSubmit }) {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/apply', {
+      const response = await fetch('https://website-livid-eight-69.vercel.app/apply', {
         method: 'POST',
         body: formDataToSend,
         onUploadProgress: (progressEvent) => {
