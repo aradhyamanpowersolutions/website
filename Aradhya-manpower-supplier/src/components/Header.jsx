@@ -66,7 +66,7 @@ function Header() {
                   className={`hover:text-blue-400 transition duration-300 text-sm font-medium ${location.pathname === item.path
                     ? 'text-blue-500 hover:text-blue-600'
                     : item.name === 'Contact Us'
-                      ? 'text-blue-500 hover:text-blue-600'
+                      ? 'text-green-500 hover:text-green-600'
                       : 'text-gray-800 dark:text-gray-300'
                     }`}
                 >

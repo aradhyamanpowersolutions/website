@@ -89,16 +89,15 @@ function Home() {
 
     
   ];
-
   const logoContainerRef = useRef(null);
   const [logoWidth, setLogoWidth] = useState(0);
 
   useEffect(() => {
     if (logoContainerRef.current) {
       const containerWidth = logoContainerRef.current.offsetWidth;
-      setLogoWidth(containerWidth / logos.length);
+      setLogoWidth(containerWidth / 5); // Show 5 logos at a time
     }
-  }, [logos.length]);
+  }, []);
 
   const logoAnimation = {
     x: [-logoWidth, -logoWidth * logos.length],
@@ -106,12 +105,11 @@ function Home() {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 20,
+        duration: 30,
         ease: "linear",
       },
     },
   };
-
   return (
     <div className="home bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 min-h-screen">
       {/* Hero Section */}
@@ -238,7 +236,8 @@ function Home() {
       <section className="our-process-section py-24">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-semibold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Our Process</h2>
-          <div className="process-timeline">
+          <div className="process-timeline relative">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200 dark:bg-blue-700 rounded"></div>
             {processSteps.map((step, index) => (
               <ProcessStep key={index} step={step} index={index} />
             ))}

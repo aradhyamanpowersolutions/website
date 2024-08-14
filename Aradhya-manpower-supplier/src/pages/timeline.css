@@ -4,7 +4,6 @@
   font-family: 'Dancing Script', cursive;
 }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -143,29 +142,33 @@ body {
   padding: 6rem 0;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   .process-timeline {
-    padding-left: 20px;
+    padding-left: 0;
   }
 
   .process-timeline::before {
-    left: 0;
+    display: none; /* Hide the timeline line on mobile */
   }
 
   .process-card,
   .process-card:nth-child(even) {
     width: 100%;
-    margin-left: 20px;
+    margin-left: 0;
     margin-right: 0;
   }
 
   .process-card::before,
   .process-card:nth-child(even)::before {
-    left: -30px;
-    right: auto;
+    display: none; /* Hide the circle markers on mobile */
+  }
+
+  /* Optional: Add some space between cards on mobile */
+  .process-card {
+    margin-bottom: 20px;
   }
 }
+
 
 /* Animation keyframes */
 @keyframes fadeIn {
