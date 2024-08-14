@@ -134,7 +134,6 @@ function ServiceCard({ service, onClick }) {
       whileHover={{ 
         scale: 1.05, 
         boxShadow: '0 20px 30px rgba(0,0,0,0.2)',
-        borderRadius: '30px',
       }}
       whileTap={{ scale: 0.95 }}
       className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700"

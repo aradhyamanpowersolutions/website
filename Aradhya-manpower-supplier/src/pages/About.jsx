@@ -98,7 +98,6 @@ function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transition-all duration-300 cursor-pointer border border-white border-opacity-20 flex flex-col h-full"
             >
               <div className="p-6 flex-grow">
@@ -110,7 +109,6 @@ function About() {
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg transition-all duration-300 cursor-pointer border border-white border-opacity-20 flex flex-col h-full"
             >
               <div className="p-6 flex-grow">
@@ -136,7 +134,6 @@ function About() {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-md"
               >
                 <div className="text-4xl mb-4">{value.icon}</div>
