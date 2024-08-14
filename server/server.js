@@ -6,14 +6,16 @@ const dotenv = require('dotenv');
 
 const app = express();
 const port = process.env.PORT || 5000;
-
 const cors = require('cors');
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://aradhyamanpowersupplier.vercel.app'],
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  origin: ['https://aradhyamanpowersupplier.vercel.app', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
+
 dotenv.config();
 
 app.use(express.json());
