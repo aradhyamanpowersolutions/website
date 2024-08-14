@@ -127,20 +127,17 @@ function ServiceHighlight({ icon: Icon, title, description, onClick }) {
     </motion.div>
   );
 }
-
 function ServiceCard({ service, onClick }) {
   return (
     <motion.div
       whileHover={{ 
-        scale: 1.05, 
-        boxShadow: '0 20px 30px rgba(0,0,0,0.2)',
+        scale: 1.05,
       }}
       whileTap={{ scale: 0.95 }}
       className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 dark:border-gray-700"
       onClick={() => onClick(service)}
     >
       <div className="p-6 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
         <div className="relative z-10">
           <div className="flex items-center mb-4">
             <service.icon className="h-12 w-12 text-blue-400 mr-4 transition-transform duration-300 group-hover:rotate-12" />
