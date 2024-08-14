@@ -3,6 +3,8 @@
 .font-cursive {
   font-family: 'Dancing Script', cursive;
 }
+
+
 body {
   margin: 0;
   padding: 0;
@@ -143,20 +145,24 @@ body {
 
 /* Responsive styles */
 @media (max-width: 768px) {
+  .process-timeline {
+    padding-left: 20px;
+  }
+
   .process-timeline::before {
-    left: 20px;
+    left: 0;
   }
 
   .process-card,
   .process-card:nth-child(even) {
-    width: calc(100% - 50px);
-    margin-left: 50px;
+    width: 100%;
+    margin-left: 20px;
     margin-right: 0;
   }
 
   .process-card::before,
   .process-card:nth-child(even)::before {
-    left: -36px;
+    left: -30px;
     right: auto;
   }
 }

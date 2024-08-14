@@ -1,6 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html {
+
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
     scroll-behavior: smooth;
+
+  }
+  
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .home {
+    overflow-x: hidden;
+    width: 100%;
   }
