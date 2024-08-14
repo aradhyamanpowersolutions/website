@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+}
+
+.home {
+  background-image: linear-gradient(to bottom right, #EBF4FF, #F3E8FF);
+}
+
+.dark .home {
+  background-image: linear-gradient(to bottom right, #1F2937, #111827);
+}
+
+/* Hero section */
+.hero-section {
+  padding-top: 5rem;
+}
+
+/* Services section */
+.services-section {
+  padding: 6rem 0;
+}
+
+/* Process section */
+.our-process-section {
+  padding: 6rem 0;
+}
+
+.process-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.process-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background-color: rgba(59, 130, 246, 0.5);
+  border-radius: 2px;
+}
+
+.process-card {
+  width: calc(50% - 30px);
+  margin-left: auto;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.process-card::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -36px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.process-card:nth-child(even) {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.process-card:nth-child(even)::before {
+  left: auto;
+  right: -36px;
+}
+
+.process-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.process-card .p-6 {
+  position: relative;
+  z-index: 1;
+}
+
+.process-card .absolute {
+  background-image: linear-gradient(to bottom right, rgba(96, 165, 250, 0.1), rgba(167, 139, 250, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.process-card:hover .absolute {
+  opacity: 1;
+}
+
+.process-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1F2937;
+  transition: color 0.3s ease;
+}
+
+.dark .process-card h3 {
+  color: #F3F4F6;
+}
+
+.process-card:hover h3 {
+  color: #3b82f6;
+}
+
+.process-card p {
+  font-size: 1rem;
+  color: #4B5563;
+  transition: color 0.3s ease;
+}
+
+.dark .process-card p {
+  color: #D1D5DB;
+}
+
+/* Testimonials section */
+.testimonials-section {
+  padding: 6rem 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .process-timeline::before {
+    left: 20px;
+  }
+
+  .process-card,
+  .process-card:nth-child(even) {
+    width: calc(100% - 50px);
+    margin-left: 50px;
+    margin-right: 0;
+  }
+
+  .process-card::before,
+  .process-card:nth-child(even)::before {
+    left: -36px;
+    right: auto;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply animations */
+.hero-section,
+.services-section,
+.our-process-section,
+.testimonials-section {
+  animation: fadeIn 1s ease-out;
+}
+
+.process-card {
+  animation: slideUp 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.process-card:nth-child(1) { animation-delay: 0.1s; }
+.process-card:nth-child(2) { animation-delay: 0.2s; }
+.process-card:nth-child(3) { animation-delay: 0.3s; }
+.process-card:nth-child(4) { animation-delay: 0.4s; }
+.process-card:nth-child(5) { animation-delay: 0.5s; }
