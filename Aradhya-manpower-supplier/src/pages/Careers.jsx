@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import ApplyForm from './ApplyForm';
@@ -70,17 +70,38 @@ const WhyJoinUs = () => {
     </div>
   );
 };
-
 function Careers() {
   const [showPopup, setShowPopup] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const whyJoinUsRef = useRef(null);
+
+  useEffect(() => {
+    if (showPopup) {
+      setScrollPosition(window.pageYOffset);
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [showPopup, scrollPosition]);
 
   const handleApplicationSubmit = (status) => {
     setSubmitStatus(status);
     setShowPopup(true);
     setIsSubmitting(false);
+    setScrollPosition(window.pageYOffset);
   };
 
   const scrollToWhyJoinUs = () => {
@@ -113,7 +134,7 @@ function Careers() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         className="fixed inset-0 flex items-center justify-center z-50"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', top: scrollPosition }}
       >
         <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-sm w-full mx-4 text-center shadow-xl">
           {icon}
@@ -207,19 +228,17 @@ function Careers() {
           </AnimatedSection>
         </div>
       </section>
-
       <section id="apply-now" className="py-24 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
-          <AnimatedSection>
-            <h2 className="text-4xl font-bold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
-              Apply Now
-            </h2>
-            <div className="max-w-3xl mx-auto">
-              <ApplyForm onSubmit={handleApplicationSubmit} />
-            </div>
-          </AnimatedSection>
+          <h2 className="text-4xl font-bold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+            Apply Now
+          </h2>
+          <div className="max-w-3xl mx-auto">
+            <ApplyForm onSubmit={handleApplicationSubmit} />
+          </div>
         </div>
       </section>
+
       <AnimatePresence>
         {showPopup && (
           <PopupCard

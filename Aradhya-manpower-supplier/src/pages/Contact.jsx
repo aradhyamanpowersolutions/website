@@ -12,11 +12,69 @@ const AnimatedSection = ({ children, delay = 0 }) => (
     {children}
   </motion.div>
 );
+const PopupCard = ({ isSubmitting, status, onClose, scrollPosition }) => {
+  let message = '';
+  let icon = null;
+
+  if (isSubmitting) {
+    message = "Sending your message...";
+    icon = (
+      <svg className="animate-spin h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    );
+  } else if (status === 'success') {
+    message = "Thank you! We'll reach back to you soon.";
+    icon = <CheckCircleIcon className="h-16 w-16 text-green-500" />;
+  } else if (status === 'error') {
+    message = "Oops! An error occurred. Please try again.";
+    icon = <ExclamationCircleIcon className="h-16 w-16 text-red-500" />;
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        top: scrollPosition,
+        height: '100vh'
+      }}
+    >
+      <motion.div
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.9, y: 20 }}
+        className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-sm w-full mx-auto text-center shadow-2xl relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-700 dark:to-gray-900 opacity-50"></div>
+        <div className="relative z-10">
+          <div className="mb-6">{icon}</div>
+          <p className="text-xl font-semibold text-gray-800 dark:text-white mb-6">{message}</p>
+          {!isSubmitting && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onClose}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300"
+            >
+              Close
+            </motion.button>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,10 +87,31 @@ function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (showPopup) {
+      setScrollPosition(window.pageYOffset);
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [showPopup, scrollPosition]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setShowPopup(true);
+    setScrollPosition(window.pageYOffset);
 
     fetch('https://website-livid-eight-69.vercel.app/contact', {
       method: 'POST',
@@ -59,52 +138,6 @@ function Contact() {
         setIsSubmitting(false);
       });
   };
-
-  const PopupCard = ({ isSubmitting, status, onClose }) => {
-    let message = '';
-    let icon = null;
-
-    if (isSubmitting) {
-      message = "Sending your message to the stars...";
-      icon = (
-        <svg className="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-      );
-    } else if (status === 'success') {
-      message = "Thank you! We'll reach back to you soon. Please check your email.";
-      icon = <CheckCircleIcon className="h-12 w-12 text-green-500" />;
-    } else if (status === 'error') {
-      message = "Oops! An error occurred. Please try again.";
-      icon = <ExclamationCircleIcon className="h-12 w-12 text-red-500" />;
-    }
-
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        className="fixed inset-0 flex items-center justify-center z-50"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      >
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-sm w-full mx-4 text-center shadow-xl">
-          {icon}
-          <p className="mt-4 text-lg font-semibold text-gray-800 dark:text-white">{message}</p>
-          {!isSubmitting && (
-            <button
-              onClick={onClose}
-              className="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
-            >
-              Close
-            </button>
-          )}
-        </div>
-      </motion.div>
-    );
-  };
-
-
   return (
     <div className="contact bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 min-h-screen">
       {/* Hero Section */}
@@ -298,7 +331,7 @@ function Contact() {
               >
                 <EnvelopeIcon className="w-12 h-12 mx-auto mb-4 text-blue-500" />
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Email</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-lg">aradhyamanpowersolutions@gmail.com </p>
+                <p className="text-gray-600 dark:text-gray-300 text-lg">aradhyamanpowersolutions@gmail.com</p>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -309,7 +342,7 @@ function Contact() {
                 <p className="text-gray-600 dark:text-gray-300 text-lg">
                   C.O. 2136 Luniya Pura, Mhow, Indore,<br />
                   Branch Office 91 <br />
-                  Link raod Pithampur Dhar
+                  Link road Pithampur Dhar
                 </p>
               </motion.div>
             </div>
@@ -324,7 +357,7 @@ function Contact() {
             <h2 className="text-4xl font-bold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Find Us on the Map</h2>
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <iframe
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.9996135832574!2d75.67264454403077!3d22.621379573964095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2s0!5e0!3m2!1sen!2sin!4v1627900675523!5m2!1sen!2sin`}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.9996135832574!2d75.67264454403077!3d22.621379573964095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2s0!5e0!3m2!1sen!2sin!4v1627900675523!5m2!1sen!2sin"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}
@@ -335,7 +368,6 @@ function Contact() {
           </AnimatedSection>
         </div>
       </section>
-
       <AnimatePresence>
         {showPopup && (
           <PopupCard
@@ -344,7 +376,17 @@ function Contact() {
             onClose={() => {
               setShowPopup(false);
               setSubmitStatus(null);
+              if (submitStatus === 'success') {
+                setFormData({
+                  name: '',
+                  email: '',
+                  phone: '',
+                  company: '',
+                  message: '',
+                });
+              }
             }}
+            scrollPosition={scrollPosition}
           />
         )}
       </AnimatePresence>
