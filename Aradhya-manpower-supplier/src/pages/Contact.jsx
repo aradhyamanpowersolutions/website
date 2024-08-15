@@ -41,12 +41,17 @@ function Contact() {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.text())
-      .then((data) => {
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => Promise.reject(err));
+        }
+        return response.json();
+      })
+      .then(data => {
         console.log(data);
         setSubmitStatus('success');
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error:', error);
         setSubmitStatus('error');
       })
@@ -58,7 +63,7 @@ function Contact() {
   const PopupCard = ({ isSubmitting, status, onClose }) => {
     let message = '';
     let icon = null;
-  
+
     if (isSubmitting) {
       message = "Sending your message to the stars...";
       icon = (
@@ -74,7 +79,7 @@ function Contact() {
       message = "Oops! An error occurred. Please try again.";
       icon = <ExclamationCircleIcon className="h-12 w-12 text-red-500" />;
     }
-  
+
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -330,7 +335,7 @@ function Contact() {
           </AnimatedSection>
         </div>
       </section>
-      
+
       <AnimatePresence>
         {showPopup && (
           <PopupCard

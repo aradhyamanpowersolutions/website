@@ -9,13 +9,12 @@ const port = process.env.PORT || 5000;
 const cors = require('cors');
 
 app.use(cors({
-  origin: ['https://aradhyamanpowersupplier.vercel.app', 'http://localhost:5173'],
+  origin: ['https://aradhyamanpowersupplier.com', 'https://aradhyamanpowersupplier.vercel.app', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200
 }));
-
 dotenv.config();
 
 app.use(express.json());
@@ -80,9 +79,9 @@ app.post('/contact', (req, res) => {
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error('Error sending email:', error);
-      return res.status(500).send({ error: 'Failed to send email', details: error.toString() });
+      return res.status(500).json({ error: 'Failed to send email', details: error.toString() });
     }
-    res.status(200).send('Message sent successfully');
+    res.status(200).json({ message: 'Message sent successfully' });
   });
 });
 
