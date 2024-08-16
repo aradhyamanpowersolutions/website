@@ -60,8 +60,8 @@ function Footer() {
             <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
             <ul className="space-y-2">
               {[
-                { icon: PhoneIcon, text: '+1 (123) 456-7890' },
-                { icon: EnvelopeIcon, text: 'info@aradhyamanpower.com' },
+                { icon: PhoneIcon, text: '+91 8827653280' },
+                { icon: EnvelopeIcon, text: 'aradhyamanpowersolutions@gmail.com' },
                 { icon: MapPinIcon, text: 'Luniya Pura,Pithampur Dhar, india' },
               ].map(({ icon: Icon, text }, index) => (
                 <li key={index} className="flex items-center">
