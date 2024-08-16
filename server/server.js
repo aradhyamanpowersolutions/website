@@ -37,7 +37,7 @@ app.post('/apply', upload.single('resume'), (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: 'avanish.patidar@cdgi.edu.in',
+    to: 'aradhyamanpowersolutions@gmail.com',
     cc: email,
     subject: 'New Apply Form Submission',
     text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
@@ -64,7 +64,7 @@ app.post('/contact', (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: 'avanish.patidar@cdgi.edu.in',
+    to: 'aradhyamanpowersolutions@gmail.com',
     cc: email,
     subject: 'New Contact Form Submission',
     text: `

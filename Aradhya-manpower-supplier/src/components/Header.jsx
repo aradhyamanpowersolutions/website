@@ -47,7 +47,7 @@ function Header() {
                 transition={{ duration: 0.5 }}
                 className="flex items-center"
               >
-                <img src="/images/logo.png" alt="Aradhya Manpower Logo" className="h-10 w-10 mr-2" />
+                <img src="/images/logo1.png" alt="Aradhya Manpower Logo" className="h-10 w-10 mr-2" />
                 <div className="flex flex-col">
                   <span className="text-xl font-bold leading-tight text-blue-600">Aradhya Manpower Supplier</span>
                 </div>
