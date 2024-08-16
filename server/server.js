@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 // CORS middleware
 app.use(cors({
-  origin: ['https://aradhyamanpowersupplier.com', 'http://localhost:5173'],
+  origin: ['https://www.aradhyamanpowersupplier.com', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
