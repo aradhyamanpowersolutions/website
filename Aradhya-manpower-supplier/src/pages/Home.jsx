@@ -86,16 +86,15 @@ function Home() {
     '/images/mother.png',
     '/images/temple.png',
     '/images/knovea.png',
-
-    
   ];
+
   const logoContainerRef = useRef(null);
   const [logoWidth, setLogoWidth] = useState(0);
 
   useEffect(() => {
     if (logoContainerRef.current) {
       const containerWidth = logoContainerRef.current.offsetWidth;
-      setLogoWidth(containerWidth /8); // Show 5 logos at a time
+      setLogoWidth(containerWidth / 5); // Show 5 logos at a time
     }
   }, []);
 
@@ -105,11 +104,13 @@ function Home() {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 30,
+        duration: 50,
         ease: "linear",
       },
     },
   };
+
+  
   return (
     <div className="home bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 min-h-screen">
       {/* Hero Section */}

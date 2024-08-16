@@ -57,20 +57,20 @@ function Footer() {
             </ul>
           </motion.div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
-            <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
-            <ul className="space-y-2">
-              {[
-                { icon: PhoneIcon, text: '+91 8827653280' },
-                { icon: EnvelopeIcon, text: 'aradhyamanpowersolutions@gmail.com' },
-                { icon: MapPinIcon, text: 'Luniya Pura,Pithampur Dhar, india' },
-              ].map(({ icon: Icon, text }, index) => (
-                <li key={index} className="flex items-center">
-                  <Icon className="h-5 w-5 mr-2" />
-                  {text}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+  <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
+  <ul className="space-y-2">
+    {[
+      { icon: PhoneIcon, text: '+91 8827653280' },
+      { icon: EnvelopeIcon, text: 'aradhyamanpowersolutions@gmail.com', className: 'items-start' },
+      { icon: MapPinIcon, text: 'Luniya Pura,Pithampur Dhar, india' },
+    ].map(({ icon: Icon, text, className }, index) => (
+      <li key={index} className={`flex ${className || 'items-center'}`}>
+        <Icon className="h-6 w-5 mr-2 flex-shrink-0" />
+        <span className="break-all">{text}</span>
+      </li>
+    ))}
+  </ul>
+</motion.div>
         </div>
         <motion.div
           initial={{ opacity: 0 }}
