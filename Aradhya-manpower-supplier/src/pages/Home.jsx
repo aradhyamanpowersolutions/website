@@ -95,7 +95,7 @@ function Home() {
   useEffect(() => {
     if (logoContainerRef.current) {
       const containerWidth = logoContainerRef.current.offsetWidth;
-      setLogoWidth(containerWidth / 5); // Show 5 logos at a time
+      setLogoWidth(containerWidth /8); // Show 5 logos at a time
     }
   }, []);
 
@@ -189,7 +189,7 @@ function Home() {
                 <img
                   key={index}
                   src={logo}
-                  alt={`Client logo ${index + 1}`}
+                  alt={`Client logo ${index + 2}`}
                   className="h-12 w-auto"
                 />
               ))}
