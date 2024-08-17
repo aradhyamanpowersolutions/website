@@ -15,12 +15,15 @@ const companyPeople = [
   '/Hero_image/p6.png',
 
 ];
+
 function CompanyPeopleSlideshow() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
+  const [previousIndex, setPreviousIndex] = useState(companyPeople.length - 1);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setPreviousIndex(currentIndex);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % companyPeople.length);
       setNextIndex((prevIndex) => (prevIndex + 1) % companyPeople.length);
     }, 3000);
@@ -36,8 +39,8 @@ function CompanyPeopleSlideshow() {
           src={image}
           className="absolute top-0 left-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: index === currentIndex ? 1 : index === nextIndex ? 1 : 0,
+          animate={{
+            opacity: index === currentIndex ? 1 : index === nextIndex ? 1 : index === previousIndex ? 1 : 0,
             zIndex: index === currentIndex ? 2 : index === nextIndex ? 1 : 0
           }}
           transition={{ duration: 1 }}

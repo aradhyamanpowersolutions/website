@@ -15,8 +15,11 @@ function ApplyForm({ onSubmit }) {
   const [errors, setErrors] = useState({});
 
   const interestOptions = [
-    "Housekeeping",
-    "Catering",
+    "Lab Assistants",
+    "Maintenance Technicians",
+    "Office Assistants",
+    "Project Coordinators",
+    "Receptionist",
     "Security",
     "Facility Management",
     "Human Resources",
