@@ -5,6 +5,47 @@ import Testimonials from '../components/Testimonials';
 import './timeline.css';
 import { useInView } from 'react-intersection-observer';
 
+const companyPeople = [
+  '/Hero_image/p1.png',
+  '/Hero_image/p3.png',
+  '/Hero_image/p4.png',
+  '/Hero_image/p5.png',
+  '/Hero_image/p7.png',
+  '/Hero_image/p8.png',
+  '/Hero_image/p6.png',
+
+];
+function CompanyPeopleSlideshow() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % companyPeople.length);
+      setNextIndex((prevIndex) => (prevIndex + 1) % companyPeople.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative w-full h-64 sm:h-80 md:h-96 rounded-xl overflow-hidden shadow-lg">
+      {companyPeople.map((image, index) => (
+        <motion.img
+          key={index}
+          src={image}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: index === currentIndex ? 1 : index === nextIndex ? 1 : 0,
+            zIndex: index === currentIndex ? 2 : index === nextIndex ? 1 : 0
+          }}
+          transition={{ duration: 1 }}
+        />
+      ))}
+    </div>
+  );
+}
 function ProcessStep({ step, index }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({
@@ -109,95 +150,108 @@ function Home() {
       },
     },
   };
-
-  
   return (
     <div className="home bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-section min-h-screen flex items-center justify-center pt-16">
-        <div className="container mx-auto px-4 text-center">
+        <section className="hero-section min-h-screen flex items-center justify-center pt-24 pb-16">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col lg:flex-row items-center justify-between">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left"
+      >
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
+            Aradhya Manpower Supplier
+          </h1>
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl lg:text-2xl mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-cursive"
           >
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
-              Aradhya Manpower Supplier
-            </h1>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-2xl md:text-3xl mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-cursive"
-            >
-              Serving your needs better
-            </motion.div>
-            <p className="text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-              Transforming workplaces with efficient and reliable manpower services. Elevate your business with our expert solutions.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Link
-                to="/services"
-                className="bg-orange-500 text-white py-3 px-8 rounded-full font-semibold hover:bg-orange-600 transition duration-300 text-lg inline-flex items-center justify-center"
-              >
-                Our Services
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 ml-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </Link>
-              <Link
-                to="/contact"
-                className="bg-transparent border-2 border-purple-500 text-purple-500 py-3 px-8 rounded-full font-semibold hover:bg-purple-500 hover:text-white transition duration-300 text-lg inline-flex items-center justify-center"
-              >
-                Contact Us
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 ml-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-                  />
-                </svg>
-              </Link>
-            </div>
+            Serving your needs better
           </motion.div>
-          {/* Logo Slideshow */}
-          <div className="overflow-hidden mt-16">
-            <motion.div
-              ref={logoContainerRef}
-              className="flex space-x-12"
-              animate={logoAnimation}
+          <p className="text-lg mb-12 text-gray-700 dark:text-gray-300 max-w-xl">
+            Transforming workplaces with efficient and reliable manpower services. Elevate your business with our expert solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6">
+            <Link
+              to="/services"
+              className="bg-orange-500 text-white py-3 px-8 rounded-full font-semibold hover:bg-orange-600 transition duration-300 text-lg inline-flex items-center justify-center"
             >
-              {logos.concat(logos).map((logo, index) => (
-                <img
-                  key={index}
-                  src={logo}
-                  alt={`Client logo ${index + 2}`}
-                  className="h-12 w-auto"
+              Our Services
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 ml-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                 />
-              ))}
-            </motion.div>
+              </svg>
+            </Link>
+            <Link
+              to="/contact"
+              className="bg-transparent border-2 border-purple-500 text-purple-500 py-3 px-8 rounded-full font-semibold hover:bg-purple-500 hover:text-white transition duration-300 text-lg inline-flex items-center justify-center"
+            >
+              Contact Us
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 ml-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                />
+              </svg>
+            </Link>
           </div>
-        </div>
-      </section>
+        </motion.div>
+        
+       
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full lg:w-1/2 mt-12 lg:mt-0"
+      >
+        <CompanyPeopleSlideshow />
+      </motion.div>
+    </div>
+
+    {/* Logo Slideshow */}
+    <div className="mt-20">
+    <h2 className="text-4xl font-semibold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">Our Client</h2>
+    <div className="overflow-hidden">
+        <motion.div
+          ref={logoContainerRef}
+          className="flex space-x-12"
+          animate={logoAnimation}
+        >
+          {logos.concat(logos).map((logo, index) => (
+            <img
+              key={index}
+              src={logo}
+              alt={`Client logo ${index + 1}`}
+              className="h-12 w-auto"
+            />
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Services Section */}
       <section className="services-section py-24">
