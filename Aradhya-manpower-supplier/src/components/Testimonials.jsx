@@ -6,19 +6,19 @@
   const testimonials = [
     {
       name: "Ajanta Pharma Ltd.",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/ajanta.png",
       text: "Aradhya's expertise in staffing solutions has significantly enhanced our operational efficiency. Their commitment to excellence is impressive!",
     },
     {
       name: "Cipla Limited",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/cipla.png",
       text: "Aradhya's innovative approach to facility management has transformed our workspace. Their attention to detail is exceptional!",
     },
     {
       name: "Ipca Laboratories Ltd.",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/ipca.png",
       text: "Aradhya's catering services have received rave reviews from our employees. Their dedication to quality is evident in every meal!",
     },
@@ -30,25 +30,25 @@
     },
     {
       name: "Kusum Healthcare Pvt. Ltd.",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/kusum.png",
       text: "Aradhya's staffing solutions have streamlined our operations, allowing us to focus on core business activities. Their support is invaluable!",
     },
     {
       name: "Par formulations Ltd.",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/par.png",
       text: "Aradhya's facility management services have exceeded our expectations. Their professionalism is commendable!",
     },
     {
       name: "Temple Packaging",
-      company: "SEZ Pithampura",
+      company: "SEZ Pithampur",
       logo: "/images/temple.png",
       text: "Aradhya's innovative solutions have optimized our packaging processes. Their expertise has saved us time and resources!",
     },
     {
       name: "Symbioctec Pharmalab",
-      company: "SEZ Pithampura ",
+      company: "SEZ Pithampur ",
       logo: "/images/symbiotec.png",
       text: "Aradhya's catering services have become an integral part of our corporate events. Their quality and reliability are unmatched!",
     },

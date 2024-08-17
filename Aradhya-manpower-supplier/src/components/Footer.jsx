@@ -61,7 +61,7 @@ function Footer() {
   <ul className="space-y-2">
     {[
       { icon: PhoneIcon, text: '+91 8827653280' },
-      { icon: EnvelopeIcon, text: 'aradhyamanpowersolutions@gmail.com', className: 'items-start' },
+      { icon: EnvelopeIcon, text: 'HR@aradhyamanpowersupplier.com', className: 'items-start' },
       { icon: MapPinIcon, text: 'Luniya Pura,Pithampur Dhar, india' },
     ].map(({ icon: Icon, text, className }, index) => (
       <li key={index} className={`flex ${className || 'items-center'}`}>

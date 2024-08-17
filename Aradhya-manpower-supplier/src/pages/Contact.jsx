@@ -331,7 +331,7 @@ function Contact() {
               >
                 <EnvelopeIcon className="w-12 h-12 mx-auto mb-4 text-blue-500" />
                 <h3 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Email</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-lg">aradhyamanpowersolutions@gmail.com</p>
+                <p className="text-gray-600 dark:text-gray-300 text-lg">HR@aradhyamanpowersupplier.com</p>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
