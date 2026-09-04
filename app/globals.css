@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Palette: poured concrete, ink, and safety orange — the colours you actually
+   * see on a plant floor. Light only, by design: `color-scheme: light` keeps
+   * native controls and scrollbars light even on a device set to dark.
+   */
+  :root {
+    color-scheme: light;
+
+    /* Desktop header height. The sticky sub-nav on /services pins directly below
+       it and the hero clears it, so it lives in one place — hard-coding it
+       drifted twice already when the logo size changed. The header is compact
+       between md and lg, then full size. */
+    --header-h: 73px;
+
+    --ground: 238 240 243;
+    --surface: 255 255 255;
+    --raised: 248 249 251;
+    --ink: 14 17 22;
+    --muted: 70 84 95;
+    --line: 211 217 223;
+    --hivis: 255 106 19;
+    /* Text-safe orange: 4.77:1 on the ground, 5.44:1 on white. The vivid
+       --hivis stays for fills, bars and the hazard rule, where contrast rules
+       do not apply. */
+    --hivis-ink: 178 74 11;
+    --signal: 21 96 196;
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --header-h: 89px;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 2rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    width: 100%;
+    /* `clip`, not `hidden`: `hidden` makes this a scroll container and silently
+       breaks `position: sticky` on every descendant. */
+    overflow-x: clip;
+  }
+
+  body {
+    @apply bg-ground text-ink antialiased;
+    font-family: var(--font-display), system-ui, sans-serif;
+    /* Base copy sits at 17px, not 16 — this is a site read by plant managers on
+       a phone in a factory, not a design portfolio. */
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgb(var(--hivis));
+    color: rgb(14 17 22);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--hivis));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* ---- Type roles ---- */
+
+  /* Signage label: mono, spaced, uppercase. Marks a section without decorating it. */
+  .eyebrow {
+    @apply font-mono text-eyebrow font-semibold uppercase text-hivis-ink;
+  }
+
+  .eyebrow-muted {
+    @apply font-mono text-eyebrow font-medium uppercase text-muted;
+  }
+
+  .lede {
+    @apply max-w-measure text-xl leading-relaxed text-muted;
+  }
+
+  /* ---- Controls ---- */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded px-7 py-3.5 text-base font-semibold transition-colors duration-150;
+  }
+
+  /* Ink on orange is the actual safety-signage pairing, and the only one of the
+     two that clears AA for body-size text. */
+  .btn-primary {
+    @apply btn bg-hivis text-[rgb(14_17_22)] hover:bg-[rgb(230_92_10)];
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-transparent text-ink hover:border-ink;
+  }
+
+  .btn-on-dark {
+    @apply btn border border-white/25 bg-transparent text-white hover:border-white hover:bg-white/10;
+  }
+
+  /* ---- Surfaces ---- */
+
+  /* Hairline + flat fill. No glassmorphism, no drop shadows. */
+  .card {
+    @apply rounded border border-line bg-surface transition-colors duration-150;
+  }
+
+  .card-interactive {
+    @apply card hover:border-ink;
+  }
+
+  .rule {
+    @apply border-t border-line;
+  }
+
+  /**
+   * The one loud flourish on the site: a hazard stripe marking the transition
+   * into the footer. Used exactly once — everything else stays quiet.
+   */
+  .hazard-rule {
+    height: 8px;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgb(var(--hivis)) 0 14px,
+      rgb(14 17 22) 14px 28px
+    );
+  }
+
+  /* ---- Roster board: the signature element ----
+     Rows, not cards. Reads like the deployment board at a plant gate. */
+  .roster-row {
+    @apply grid grid-cols-[4.5rem_1fr] items-baseline gap-x-4 gap-y-1 border-t border-line py-4 transition-colors duration-150;
+  }
+
+  @media (min-width: 768px) {
+    .roster-row {
+      grid-template-columns: 4.5rem 15rem 1fr 1.5rem;
+      align-items: center;
+      column-gap: 2rem;
+    }
+  }
+
+  .roster-row:hover {
+    background-color: rgb(var(--hivis) / 0.06);
+  }
+
+  .roster-code {
+    @apply font-mono text-sm font-medium tabular-nums text-hivis-ink;
+  }
+
+  /* ---- Process timeline: numbered because the steps are a real sequence ---- */
+  .step-row {
+    @apply grid gap-x-6 gap-y-2 border-t border-line py-8 md:grid-cols-[6rem_1fr_auto];
+  }
+
+  .step-index {
+    @apply font-mono text-4xl font-semibold tabular-nums text-hivis-ink;
+  }
+
+  /* ---- Client logo marquee ---- */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  }
+
+  /* ---- Scroll reveal ----
+     Transform only, deliberately: no opacity fade.
+
+     Fading text in means it passes through low-contrast intermediate states,
+     which trips contrast audits and is genuinely harder to read mid-animation.
+     It was also the source of two earlier bugs where content stayed at opacity 0
+     and never appeared. Sliding fully-opaque content is safe in every one of
+     those failure modes — worst case the element sits 16px low and is still
+     perfectly readable. */
+  .reveal {
+    transform: none;
+  }
+
+  html.js-reveal .reveal {
+    transform: translateY(16px);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: transform;
+  }
+
+  html.js-reveal .reveal[data-visible='true'] {
+    transform: none;
+  }
+
+  /* ---- Status dialog ---- */
+  .dialog-backdrop {
+    animation: dialog-fade 0.15s ease-out;
+  }
+
+  .dialog-panel {
+    animation: dialog-rise 0.2s ease-out;
+  }
+
+  @keyframes dialog-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    @apply w-full rounded border border-line bg-raised px-4 py-3.5 text-base text-ink placeholder:text-muted/70;
+  }
+
+  .field-error {
+    @apply border-[rgb(200_45_30)];
+  }
+
+  .field-label {
+    @apply mb-2 block font-mono text-sm font-medium uppercase tracking-wider text-muted;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.js-reveal .reveal {
+    transform: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

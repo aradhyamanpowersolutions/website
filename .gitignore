@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Production
+build/
+dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.claude/
+
+# macOS
+.DS_Store
