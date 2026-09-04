@@ -18,6 +18,7 @@ const config = {
         hivis: 'rgb(var(--hivis) / <alpha-value>)',
         'hivis-ink': 'rgb(var(--hivis-ink) / <alpha-value>)',
         signal: 'rgb(var(--signal) / <alpha-value>)',
+        whatsapp: 'rgb(var(--whatsapp) / <alpha-value>)',
       },
       fontFamily: {
         // Archivo carries a width axis — condensed for signage, normal for text.

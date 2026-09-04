@@ -51,15 +51,24 @@ export default function HomePage() {
         bottom — which is what these frames were composed to survive. Trimming the
         sides is what wrecks them.
       */}
-      <section className="border-b border-line px-6 pb-14 pt-16 md:pt-[calc(var(--header-h)+2.5rem)]">
+      <section className="border-b border-line px-6 pb-14 pt-14 md:pt-[calc(var(--header-h)+1.5rem)]">
         <div className="mx-auto max-w-6xl">
-          <p className="eyebrow mb-7">Indore · Pithampur · Madhya Pradesh</p>
+          <p className="eyebrow mb-5">Indore · Pithampur · Madhya Pradesh</p>
 
-          <div className="grid gap-x-16 gap-y-8 lg:grid-cols-12">
+          <div className="grid gap-x-16 gap-y-7 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <h1 className="text-[clamp(2.5rem,5vw,4.25rem)] font-extrabold leading-[0.98] tracking-[-0.03em]">
+              <h1 className="text-[clamp(2.5rem,4.8vw,4rem)] font-extrabold leading-[0.98] tracking-[-0.03em]">
                 We put trained people on your plant floor.
               </h1>
+
+              {/* Proof sits under the headline rather than in the right column —
+                  it fills space that was empty there and shortens the row, which
+                  lifts the photograph into the first screen on short laptops. */}
+              <p className="mt-7 font-mono text-base leading-relaxed text-muted">
+                <span className="eyebrow-muted mr-3">Supplying</span>
+                Cipla · Lupin · Ipca · Ajanta Pharma
+                <span className="text-hivis-ink"> +8 more</span>
+              </p>
             </div>
 
             <div className="lg:col-span-5">
@@ -69,7 +78,7 @@ export default function HomePage() {
                 your gate.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link href="/contact" className="btn-primary">
                   Request staff
                   <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
@@ -79,19 +88,10 @@ export default function HomePage() {
                   {site.phones[0].display}
                 </a>
               </div>
-
-              {/* Proof in the first screen, without waiting for the logo wall. */}
-              <div className="mt-8 border-t border-line pt-5">
-                <p className="eyebrow-muted">Supplying manpower to</p>
-                <p className="mt-2 font-mono text-base leading-relaxed text-muted">
-                  Cipla · Lupin · Ipca · Ajanta Pharma
-                  <span className="text-hivis-ink"> +8 more</span>
-                </p>
-              </div>
             </div>
           </div>
 
-          <div className="mt-14">
+          <div className="mt-10">
             <HeroSlideshow />
           </div>
         </div>

@@ -7,6 +7,8 @@ import ApplyForm from '@/components/careers/ApplyForm';
 import Reveal from '@/components/Reveal';
 import Icon from '@/components/Icon';
 import JsonLd from '@/components/JsonLd';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { whatsappLink, jobEnquiryMessage } from '@/lib/whatsapp';
 import CtaBand from '@/components/CtaBand';
 import { site } from '@/lib/site';
 import { interestOptions } from '@/lib/services';
@@ -140,13 +142,28 @@ export default function CareersPage() {
                 title="Apply now."
                 lede="Fields marked with an asterisk are required. Attach your résumé as a PDF under 5 MB."
               />
-              <p className="mt-8 font-mono text-sm leading-relaxed text-muted">
-                Questions?
-                <br />
-                <a href={`mailto:${site.emails[1] ?? site.emails[0]}`} className="inline-block py-1.5 text-signal hover:text-hivis-ink">
-                  {site.emails[1] ?? site.emails[0]}
+              <div className="mt-8">
+                <p className="eyebrow-muted mb-3">Questions before applying?</p>
+                <a
+                  href={whatsappLink(jobEnquiryMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp"
+                >
+                  <WhatsAppIcon className="h-5 w-5" />
+                  Chat on WhatsApp
                 </a>
-              </p>
+                <p className="mt-4 font-mono text-sm leading-relaxed text-muted">
+                  Send the application form itself — WhatsApp cannot carry your résumé file.
+                  <br />
+                  <a
+                    href={`mailto:${site.emails[1] ?? site.emails[0]}`}
+                    className="inline-block break-all py-1.5 text-signal hover:text-hivis-ink"
+                  >
+                    {site.emails[1] ?? site.emails[0]}
+                  </a>
+                </p>
+              </div>
             </div>
             <div className="md:col-span-8">
               <ApplyForm />

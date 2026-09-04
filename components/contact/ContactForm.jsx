@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import StatusDialog from '@/components/StatusDialog';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { whatsappLink, staffEnquiryMessage } from '@/lib/whatsapp';
 
 const EMPTY = { name: '', email: '', phone: '', company: '', message: '', website: '' };
 
@@ -145,13 +147,32 @@ export default function ContactForm() {
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="btn-primary mt-8 w-full disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {isSubmitting ? 'Sending…' : 'Send Message'}
-        </button>
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmitting ? 'Sending…' : 'Send message'}
+          </button>
+
+          {/* Opens WhatsApp with everything typed so far already in the message.
+              Not a submit button — it deliberately leaves the form intact so the
+              visitor can still send by email if they change their mind. */}
+          <a
+            href={whatsappLink(staffEnquiryMessage(formData))}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-whatsapp w-full"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            Send on WhatsApp
+          </a>
+        </div>
+
+        <p className="mt-4 text-center text-base text-muted">
+          WhatsApp opens with your details filled in — you just press send.
+        </p>
       </form>
 
       <StatusDialog

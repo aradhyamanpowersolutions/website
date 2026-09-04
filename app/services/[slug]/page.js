@@ -7,6 +7,8 @@ import SectionHeader from '@/components/SectionHeader';
 import CtaBand from '@/components/CtaBand';
 import Icon from '@/components/Icon';
 import JsonLd from '@/components/JsonLd';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { whatsappLink, roleEnquiryMessage } from '@/lib/whatsapp';
 import { imagePlaceholder } from '@/lib/blur';
 import { site } from '@/lib/site';
 import { allServices, serviceCategories, processSteps, whyChooseUs } from '@/lib/services';
@@ -128,6 +130,15 @@ export default async function ServiceDetailPage({ params }) {
                   Request {service.name.toLowerCase()}
                   <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
                 </Link>
+                <a
+                  href={whatsappLink(roleEnquiryMessage(service.name))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp"
+                >
+                  <WhatsAppIcon className="h-5 w-5" />
+                  WhatsApp
+                </a>
                 <a href={`tel:${site.phones[0].tel}`} className="btn-ghost">
                   <PhoneIcon className="h-5 w-5" aria-hidden="true" />
                   {site.phones[0].display}

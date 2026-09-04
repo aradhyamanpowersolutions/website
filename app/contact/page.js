@@ -1,5 +1,8 @@
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { whatsappLink, generalEnquiryMessage } from '@/lib/whatsapp';
+
 import PageHeader from '@/components/PageHeader';
 import SectionHeader from '@/components/SectionHeader';
 import ContactForm from '@/components/contact/ContactForm';
@@ -56,7 +59,23 @@ export default function ContactPage() {
           <h2 id="contact-info-heading" className="eyebrow-muted mb-8">
             Direct lines
           </h2>
-          <div className="grid gap-px border border-line bg-line md:grid-cols-3">
+          <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            <div className="bg-surface p-7">
+              <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
+              <h3 className="mt-5 text-xl font-semibold">WhatsApp</h3>
+              <p className="mt-3 text-base text-muted">
+                Fastest way to reach us. Opens a chat with your enquiry ready to send.
+              </p>
+              <a
+                href={whatsappLink(generalEnquiryMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 py-1.5 font-mono text-base text-whatsapp hover:text-hivis-ink"
+              >
+                {site.phones[0].display}
+              </a>
+            </div>
+
             <div className="bg-surface p-7">
               <PhoneIcon className="h-5 w-5 text-hivis-ink" aria-hidden="true" />
               <h3 className="mt-5 font-semibold">Phone</h3>

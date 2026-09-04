@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
 import { site } from '@/lib/site';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { whatsappLink, generalEnquiryMessage } from '@/lib/whatsapp';
 import { allServices } from '@/lib/services';
 
 const quickLinks = [
@@ -64,6 +66,17 @@ export default function Footer() {
             <div className="md:col-span-4">
               <h2 className="eyebrow text-[rgb(255_122_41)]">Contact</h2>
               <ul className="mt-4 space-y-1 font-mono text-sm">
+                <li>
+                  <a
+                    href={whatsappLink(generalEnquiryMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 py-1.5 text-[rgb(200_208_216)] hover:text-white"
+                  >
+                    <WhatsAppIcon className="h-4 w-4 text-[rgb(94_206_128)]" />
+                    WhatsApp
+                  </a>
+                </li>
                 {site.phones.map((phone) => (
                   <li key={phone.tel}>
                     <a href={`tel:${phone.tel}`} className="inline-block py-1.5 text-[rgb(200_208_216)] hover:text-white">
